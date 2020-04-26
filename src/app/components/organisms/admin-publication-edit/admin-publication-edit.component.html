@@ -1,0 +1,29 @@
+<div class="form">
+  <ng-container *ngIf="!error; else elseBlock">
+    <form [formGroup]="dynamicForm" (submit)="onSubmit($event)">
+      <ng-container
+        *ngFor="let field of fields"
+        dynamicField
+        [field]="field"
+        [formGroup]="dynamicForm"
+        frmCtrlName="{{fieldPrefix + field.fieldId}}"
+      >
+      </ng-container>
+      <div class="col text-center">
+        <button
+          type="submit"
+          class="btn btn-primary mb-2"
+          [disabled]="dynamicForm.invalid"
+        >
+          Save
+        </button>
+      </div>
+    </form>
+    <pre *ngIf="formValues">{{formValues | json}}</pre>
+  </ng-container>
+  <ng-template #elseBlock
+    ><div class="alert alert-danger" role="alert">
+      {{error}}
+    </div></ng-template
+  >
+</div>

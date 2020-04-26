@@ -1,0 +1,17 @@
+<div class="form-group" [formGroup]="formGroup" [hidden]="field.isHidden">
+  <label>{{field.name}}</label>
+  <input
+    type="text"
+    class="form-control mb-3"
+    [ngClass]="{'is-invalid' : formGroup.get(formControlName).invalid}"
+    [placeholder]="field.placeholderTxt"
+    [formControlName]="formControlName"
+    bsDatepicker
+  />
+  <div
+    class="invalid-feedback"
+    *ngIf="formGroup.get(formControlName).errors?.required"
+  >
+    Field is required.
+  </div>
+</div>

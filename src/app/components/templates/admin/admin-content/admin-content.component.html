@@ -1,0 +1,26 @@
+<div class="columns">
+  <div class="column">
+    <div class="card events-card">
+      <header class="card-header">
+        <p class="card-header-title">
+          Publications
+        </p>
+        <a href="#" class="card-header-icon" aria-label="more options">
+          <span class="icon">
+            <i class="fa fa-angle-down" aria-hidden="true"></i>
+          </span>
+        </a>
+      </header>
+      <app-admin-record-field-table
+        [data]="publications | async"
+        (selected)="editPublication($event)"
+      ></app-admin-record-field-table>
+      <router-outlet></router-outlet>
+      <footer class="card-footer">
+        <a href="#" class="card-footer-item inactive-component"
+          >Pagination (stub)</a
+        >
+      </footer>
+    </div>
+  </div>
+</div>

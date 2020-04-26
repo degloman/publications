@@ -1,0 +1,26 @@
+<div class="table">
+  <div class="content">
+    <table class="table is-fullwidth is-striped is-hoverable">
+      <thead>
+        <tr>
+          <th *ngFor="let header of headers">{{header}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let record of data">
+          <td
+            *ngFor="let field of record.fields"
+            (click)="clickHandler(record.id)"
+          >
+            <ng-container [ngSwitch]="field.type">
+              <ng-container *ngSwitchCase="RecordFieldType.datatime">
+                {{field.value | date}}</ng-container
+              >
+              <ng-container *ngSwitchDefault> {{field.value}}</ng-container>
+            </ng-container>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
