@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AdminApiService } from 'src/core/services/admin-api.service';
+import { AdminApiService } from 'src/app/core/services/admin-api.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({

@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { RecordFieldType } from 'src/core/models/record-field-type.enum';
-import { Record } from 'src/core/models/record.model';
-import { RecordField } from 'src/core/models/record-field.interface';
+import { RecordFieldType } from 'src/app/core/models/record-field-type.enum';
+import { Record } from 'src/app/core/models/record.model';
+import { RecordField } from 'src/app/core/models/record-field.interface';
 @Component({
   selector: 'app-admin-record-field-table',
   templateUrl: './admin-record-field-table.component.html',

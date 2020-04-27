@@ -6,11 +6,12 @@ import {
   Validators,
   ValidatorFn,
 } from '@angular/forms';
-import { AdminApiService } from 'src/core/services/admin-api.service';
-import { RecordField } from 'src/core/models/record-field.interface';
-import { Record } from 'src/core/models/record.model';
-import { RecordFieldType } from 'src/core/models/record-field-type.enum';
-import { RecordResponse } from 'src/core/models/record-response.interface';
+import { AdminApiService } from 'src/app/core/services/admin-api.service';
+import { RecordField } from 'src/app/core/models/record-field.interface';
+import { Record } from 'src/app/core/models/record.model';
+import { RecordFieldType } from 'src/app/core/models/record-field-type.enum';
+import { RecordResponse } from 'src/app/core/models/record-response.interface';
+import { validateAllFormFields } from 'src/app/core/helpers/formValidatior';
 
 @Component({
   selector: 'app-admin-publication-edit',
@@ -75,15 +76,8 @@ export class AdminPublicationEditComponent implements OnInit {
     if (this.dynamicForm.valid) {
       this.formValues = this.mapFieldsForSaving(this.dynamicForm.value);
     } else {
-      this.validateAllFormFields(this.dynamicForm);
+      validateAllFormFields(this.dynamicForm);
     }
-  }
-
-  private validateAllFormFields(formGroup: FormGroup) {
-    Object.keys(formGroup.controls).forEach((field) => {
-      const control = formGroup.get(field);
-      control.markAsTouched({ onlySelf: true });
-    });
   }
 
   private mapFieldsForSaving(formValues: object): RecordResponse {

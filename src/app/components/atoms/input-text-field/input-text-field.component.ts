@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RecordField } from 'src/core/models/record-field.interface';
+import { RecordField } from 'src/app/core/models/record-field.interface';
 import { FormGroup } from '@angular/forms';
 
 @Component({

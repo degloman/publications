@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { AdminPublicationEditComponent } from '../admin-publication-edit/admin-publication-edit.component';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, NavigationStart } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -12,7 +12,7 @@ import { Subscription } from 'rxjs';
 export class AdminPublicationEditModalEntryComponent
   implements OnInit, OnDestroy {
   private bsModalRef: BsModalRef;
-  private subscription: Subscription;
+  private subscriptions: Subscription[] = [];
   constructor(
     private modalService: BsModalService,
     private route: ActivatedRoute,
@@ -28,13 +28,26 @@ export class AdminPublicationEditModalEntryComponent
     this.bsModalRef = this.modalService.show(AdminPublicationEditComponent, {
       initialState,
     });
-    this.subscription = this.modalService.onHidden.subscribe((r) => {
-      this.router.navigate(['admin']);
-    });
+    this.subscriptions.push(
+      this.modalService.onHidden.subscribe((r) => {
+        this.router.navigate(['admin']);
+      })
+    );
+    this.subscriptions.push(
+      this.router.events.subscribe((event: NavigationStart) => {
+        if (event.navigationTrigger === 'popstate') {
+          this.bsModalRef.hide();
+        }
+      })
+    );
   }
   ngOnDestroy() {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
+    if (this.subscriptions) {
+      for (let subscription of this.subscriptions) {
+        if (subscription) {
+          subscription.unsubscribe();
+        }
+      }
     }
   }
 }
